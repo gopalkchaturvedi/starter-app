@@ -1,0 +1,32 @@
+<span>use-of-template works start !</span>
+<div><p *ngIf ="isAvailalbe; then condition1 else condition2"> tickets  </p></div>
+<ng-template #condition1>ticket are available </ng-template>
+<ng-template #condition2>ticket are  not available  </ng-template>
+
+<ng-template #sayHelloTemplate ><h3>say hello </h3></ng-template>
+
+<ng-container *ngTemplateOutlet="sayHelloTemplate"></ng-container>
+
+<p *ngTemplateOutlet="sayHelloTemplate"></p>
+<div><h3>to do List</h3> <button (click)="addItem()"> add Item</button>
+<select></select>
+<option *ngFor="let i of toDo">{{i}}</option>
+</div>
+
+<!--
+<ng-template let-class="class" #classTemplate>  <p>thsi class of seats {{class}}</p></ng-template>
+<ng-container [ngTemplateOutlet]="classTemplate" [ngTemplateOutletContext] = "{class:'Gold'}"></ng-container>
+<ng-container [ngTemplateOutlet]="classTemplate" [ngTemplateOutletContext] = "{class:'Diomond'}"></ng-container>
+
+<ng-template let-price="price" #priceTemplate>  <p>thsi class of seats {{price}}</p></ng-template>
+<ng-container [ngTemplateOutlet]="priceTemplate" [ngTemplateOutletContext] = "{price:'500'}"></ng-container>
+<ng-container [ngTemplateOutlet]="priceTemplate" [ngTemplateOutletContext] = "{price:'1000'}"></ng-container>
+-->
+<ng-template let-movie="movie"#movieTemplate>  <p>the name of the movie is a {{movie.name}} and it is  {{movie.gnre}} movie </p></ng-template>
+<ng-container [ngTemplateOutlet]="movieTemplate" [ngTemplateOutletContext] ="{movie:{name:'avener', gnre:'Action'}}"></ng-container>
+
+<ng-template let-price="price" let-class="class" #priceTemplate>  <p>this is a  class {{class}} of price {{price}}</p></ng-template>
+<ng-container [ngTemplateOutlet]="priceTemplate" [ngTemplateOutletContext] = "{price:'500', class:'Gold'}"></ng-container>
+<ng-container [ngTemplateOutlet]="priceTemplate" [ngTemplateOutletContext] = "{price:'1000', class:'Silver'}"></ng-container>
+
+<span>use-of-template works end !</span>

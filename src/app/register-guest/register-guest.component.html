@@ -1,0 +1,38 @@
+<form name="form"  (ngSubmit)="onSubmit(f1)" ngNativeValidate>
+<div class="mb-3 row">
+    <label for="userName" class="col-sm-2 col-form-label">username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="userName" name="username" [(ngModel)]="user.userName">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="userPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="userPassword"  name="password" [(ngModel)]="user.password">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="userRole" class="col-sm-2 col-form-label">Role</label>
+    <div class="col-sm-10">
+        <select name="my-role" (change)="selectChange($event)">
+            <option [value]="0" >
+                select....
+            </option>
+            <option [value]="1" >
+                Admin
+            </option>
+            <option [value]="2" >
+                User
+            </option>
+        </select>
+        
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-10">
+   
+        <input type="submit" name="submit" value="Login" class="btn-login-box" (click)="onSubmit()">
+        </div>
+  </div>
+</form>
+  Please click for <a class="nav-link" routerLink="#" (click)="goToLoggin()"> login </a>
