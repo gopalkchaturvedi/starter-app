@@ -1,12 +1,29 @@
-<p>view-entries works!</p>
-
-<div class="container">
-    <div class="row">
-      <div class="col">s.no</div>
+<div class="container">List of entries
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
+     <div class="col" >s.no</div>
       <div class="col">text</div>
-      <div class="col">image</div>
-      <div class="col">user</div>
-      <div class="col">Action</div>
+      <div class="col" >image</div>
+      <div class="col" >approved</div>
+      <div class="col" >Action</div>
       </div>
-      <a class="nav-link" routerLink="#" (click)="go()">add an entries</a>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5"  *ngFor="let entries of usersEntriesList">
+         <div class="col" >{{entries.id}}</div>
+          <div class="col">{{entries.feedback}}</div>
+            <div class="col" ><a class="nav-link" routerLink="#" (click)=downloadfile(entries.imgurl)>{{entries.imgurl}}</a>
+          </div>
+            <div class="col"  *ngIf="entries.isApprove;else elseNotDone"> yes</div>
+            <ng-template #elseNotDone>
+              not
+            </ng-template>
+            <div class="col" >
+                  <table>
+                    <tr>
+                      <td><a class="nav-link" routerLink="#" (click)=approve(entries.id)>Approve </a></td>
+                      <td><a class="nav-link" routerLink="#" (click)=Edit(entries.id)>Edit </a></td>
+                      <td><a class="nav-link" routerLink="#" (click)=Delete(entries.id)>Delete</a></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+      <input type="button" value="add new entries" (click)="go()">
     </div>

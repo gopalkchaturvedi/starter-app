@@ -22,6 +22,7 @@ export class RegisterGuestComponent implements OnInit {
   }
 
   onSubmit(){
+    this.user.userRole=this.entriesType;
     this.loginService.register(this.user).subscribe(
       data => { // json data
           console.log('Success: ', data);
@@ -29,7 +30,7 @@ export class RegisterGuestComponent implements OnInit {
       },
       error => {
           console.log('Error: ', error);
-         // this.alertService.warning("Invalid Username or Password") ;
+         
       });
   
   }

@@ -1,0 +1,52 @@
+<p>edit works!</p>
+
+<div>
+    <table>
+    <tr>
+        <td>entry type </td>
+     <td>   
+    <div>
+    <select name="my-select" (change)="selectChange($event)">
+        <option [value]="0" >
+            select....
+        </option>
+        <option [value]="1" >
+            text
+        </option>
+        <option [value]="2" >
+            image
+        </option>
+    </select>
+    </div>
+    </td></tr>
+    <tr><td>
+    <div *ngIf="isText">
+        enter text for entries
+    </div>
+    </td>
+    <td>
+        <div *ngIf="isText">
+          <input type="textArea" name="feedback" [(ngModel)]="usersEntriesEdit.feedback"/>
+        </div>
+        </td>
+    </tr><tr>
+        <td>
+    <div *ngIf="isImage">
+        upload file
+    
+    </div>
+    </td>
+    <td>
+        <div *ngIf="isImage">
+          
+        <input type="file"/>
+        <input type="hidden" name="imgurl" [(ngModel)]="usersEntriesEdit.imgurl"/>
+        </div>
+        </td>
+        </tr>
+    </table>
+    <div>
+    <input type="button" value="update entries"(click)=save()/>
+    </div>
+    </div>
+    

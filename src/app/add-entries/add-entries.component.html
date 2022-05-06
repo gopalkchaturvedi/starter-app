@@ -37,13 +37,13 @@
 <td>
     <div *ngIf="isImage">
       
-    <input type="file"/>
+    <input type="file" (change)="selectFile($event)"/>
     <input type="hidden" name="imgurl" [(ngModel)]="userEntries.imgurl"/>
     </div>
     </td>
     </tr>
 </table>
 <div>
-<input type="button" value="add entries"(clock)=save()/>
+<input type="button" value="add entries"(click)=save()/>
 </div>
 </div>

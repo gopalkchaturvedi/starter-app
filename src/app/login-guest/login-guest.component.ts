@@ -22,9 +22,6 @@ go(){
 }
 
 onSubmit(form:NgForm){
-  alert('this is login');
-  alert(this.login.name+ 'clicked');
-  ///this.route.navigate(['/register']);
   this.loginService.signin(this.login).subscribe(
     data => { // json data
         console.log('Success: ', data);
@@ -32,8 +29,7 @@ onSubmit(form:NgForm){
     },
     error => {
         console.log('Error: ', error);
-       // this.alertService.warning("Invalid Username or Password") ;
-    });
+     });
 
 }
 }
