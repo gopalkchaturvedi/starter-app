@@ -1,12 +1,10 @@
-<p>edit works!</p>
-
-<div>
+    <div>
     <table>
     <tr>
-        <td>entry type </td>
+        <td>entry type :</td>
      <td>   
     <div>
-    <select name="my-select" (change)="selectChange($event)">
+    <select name="my-select" (change)="selectChange($event)" [(ngModel)]="entriesType">
         <option [value]="0" >
             select....
         </option>
@@ -29,21 +27,41 @@
           <input type="textArea" name="feedback" [(ngModel)]="usersEntriesEdit.feedback"/>
         </div>
         </td>
-    </tr><tr>
-        <td>
-    <div *ngIf="isImage">
-        upload file
-    
-    </div>
-    </td>
-    <td>
+    </tr>
+    <tr>
         <div *ngIf="isImage">
-          
-        <input type="file"/>
-        <input type="hidden" name="imgurl" [(ngModel)]="usersEntriesEdit.imgurl"/>
+        <td>
+        uploaded  file Name:
+        </td>
+        <td>
+            {{usersEntriesEdit.imgurl}}
+              </td>
+        </div>
+    
+    </tr>
+    <tr>
+    <td>
+            <div *ngIf="isImage">
+            
+            choose file to update
+            </div>
+
+        </td><td>
+            <div *ngIf="isImage">
+        <input type="file" vlaue=" select file to update"(change)="selectFile($event)" [(ngModel)]="usersEntriesEdit.imgurl"/>
+        
         </div>
         </td>
         </tr>
+        <tr>
+            <td>
+                <div>
+                    <input type="button" value="back"(click)=back()/>
+                </div>
+        
+            </td>
+        </tr>
+
     </table>
     <div>
     <input type="button" value="update entries"(click)=save()/>

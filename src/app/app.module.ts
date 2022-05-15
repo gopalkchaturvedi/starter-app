@@ -11,6 +11,8 @@ import { AddEntriesComponent } from './add-entries/add-entries.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './edit/edit.component';
+import { AuthGuard } from './auth.guard';
+import { AlertModule } from 'ngx-alerts';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,10 @@ import { EditComponent } from './edit/edit.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AlertModule.forRoot({maxMessages: 5, timeout: 5000}),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

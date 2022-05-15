@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { EntriesService } from '../entries.service';
 import { LoginService } from '../login.service';
 import { User } from '../model/User';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-register-guest',
@@ -12,25 +13,33 @@ import { User } from '../model/User';
 export class RegisterGuestComponent implements OnInit {
   user =  new User();
   entriesType:any;
-  constructor(private route:Router, private loginService:LoginService) { }
+ 
+  constructor(private route:Router, private loginService:LoginService ,
+    private alertService: AlertService) {
+      
+      }
+   
 
   ngOnInit() {
+    
   }
   goToLoggin(){
-    alert('clicked');
     this.route.navigate(['']);
   }
 
   onSubmit(){
-    this.user.userRole=this.entriesType;
+    //this.user.userRole=this.entriesType;
     this.loginService.register(this.user).subscribe(
       data => { // json data
-          console.log('Success: ', data);
-          this.route.navigate(['/viewEntries']);
+         // console.log('Success: ', data);
+          if(data.code===200)
+          this.loginService.message="User registered successfully, pls login ";
+          else
+          this.loginService.message="error while registering usr pls try again";
+          this.route.navigate(['']);
       },
       error => {
-          console.log('Error: ', error);
-         
+        this.loginService.message="error while registering usr pls try again";
       });
   
   }
@@ -39,7 +48,7 @@ export class RegisterGuestComponent implements OnInit {
     this.entriesType = event.target.value;
 
    if (this.entriesType === "1"){
-    this.user.userRole = 'Admin';
+    this.user.userRole = 'admin';
    }
    if (this.entriesType === "2"){
     this.user.userRole = 'user';

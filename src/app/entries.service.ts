@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from './model/User';
 import { UserEntries } from './model/UserEntries';
 
 @Injectable({
@@ -8,11 +9,15 @@ import { UserEntries } from './model/UserEntries';
 })
 export class EntriesService {
   createAPI = "http://localhost:8080/createEntries";
-  createAPIForFiles = "http://localhost:8080/createEntriesForFiles";
-  getAPI = "http://localhost:8080/getEntriesList";
+  //createAPIForFiles = "http://localhost:8080/createEntriesForFiles";
+  createAPIForFiles = "http://localhost:8080/storeFileData";
+  updateAPIForFiles = "http://localhost:8080/updateStoreFileData";
+  getAllEntries = "http://localhost:8080/getEntriesList";
+  getEntriesByUserId ="http://localhost:8080/secured/getEntriesList";
   approveAPI = "http://localhost:8080/isApproveEntry";
-  updateAPI = "http://localhost:8080/updateEntries";;
+  updateAPI = "http://localhost:8080/open/updateEntries";;
   deleteAPI = "http://localhost:8080/deleteEntries";
+  downLoadfile = "http://localhost:8080/downLoadfile";
   selectedPageAPI = "http://localhost:8080/getSelectedEntry";
   constructor(private http: HttpClient) { }
   editVar="0"; 
@@ -62,7 +67,7 @@ export class EntriesService {
 
   }
 
-  getEntriesList():Observable<any>{
+  getEntriesList(usr:User):Observable<any>{
      const body = new HttpParams()
      const httpOptions = {
        headers: new HttpHeaders({
@@ -70,7 +75,11 @@ export class EntriesService {
          'Accept': '*/*' 
        })
      };
-    return this.http.get(this.getAPI);
+    if(usr.userRole==='admin'){
+    return this.http.get(this.getEntriesByUserId+"?id="+0);
+    }else{
+    return this.http.get(this.getEntriesByUserId+"?id="+usr.id);
+    }
  
    }
   saveEntries(userEntries:UserEntries):Observable<any>{
@@ -84,9 +93,28 @@ export class EntriesService {
    return this.http.post(this.createAPI,userEntries);
 }
 
-  saveEntriesForFiles(file : File):Observable<any>{
+updateEntriesForFiles(file : File , useruserId :any,id: any):Observable<any>{
+  console.log("useruserId "+useruserId);
+  const formdata: FormData = new FormData();  
+  formdata.append('file', file);
+  formdata.append('userId', useruserId);
+  formdata.append('Id', id);
+   const body = new HttpParams()
+   const httpOptions = {
+     headers: new HttpHeaders({
+       'Content-Type':  'application/json',
+       'Accept': '*/*' 
+     })
+   };
+  return this.http.put(this.updateAPIForFiles,formdata);
+
+ }
+  saveEntriesForFiles(file : File , useruserId :any):Observable<any>{
+    
+    console.log("useruserId "+useruserId);
     const formdata: FormData = new FormData();  
     formdata.append('file', file);
+    formdata.append('userId', useruserId);
      const body = new HttpParams()
      const httpOptions = {
        headers: new HttpHeaders({
@@ -97,5 +125,18 @@ export class EntriesService {
     return this.http.post(this.createAPIForFiles,formdata);
  
    }
+
+   downloadfile(valId):Observable<Blob>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Accept': '*/*',
+        }),
+        
+        responseType : 'blob' as 'json',
+    };
+  console.log('gettin response');
+  return this.http.post<Blob>(this.downLoadfile,valId,httpOptions);
  }
 
+}

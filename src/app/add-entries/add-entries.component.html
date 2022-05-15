@@ -34,16 +34,33 @@
 
 </div>
 </td>
-<td>
+    <td>
     <div *ngIf="isImage">
       
-    <input type="file" (change)="selectFile($event)"/>
-    <input type="hidden" name="imgurl" [(ngModel)]="userEntries.imgurl"/>
+        <input type="file" (change)="selectFile($event)"/>
+        <input type="hidden" name="imgurl" [(ngModel)]="userEntries.imgurl"/>
     </div>
     </td>
     </tr>
+    <tr><td><div>
+        {{message}}
+    </div></td></tr>
+    <tr>
+        <td>
+                        <div>
+                            <input type="button" [disabled]="enableButton" value="add entries"(click)=save()/>
+                        </div>
+                   
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+             
+                <input type="button" value="back"(click)=back()/>
+            </div>
+    
+        </td>
+    </tr>
 </table>
-<div>
-<input type="button" value="add entries"(click)=save()/>
-</div>
 </div>

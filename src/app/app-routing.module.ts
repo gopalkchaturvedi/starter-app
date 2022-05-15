@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddEntriesComponent } from './add-entries/add-entries.component';
+import { AuthGuard } from './auth.guard';
 import { EditComponent } from './edit/edit.component';
 import { LoginGuestComponent } from './login-guest/login-guest.component';
 import { RegisterGuestComponent } from './register-guest/register-guest.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
     },
     {    
       path: 'viewEntries',  
-      component: ViewEntriesComponent  
+      component: ViewEntriesComponent,
+      canActivate: [AuthGuard]  
       },
       {    
         path: 'editEntries',  

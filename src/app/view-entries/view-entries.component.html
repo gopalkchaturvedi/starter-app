@@ -1,21 +1,26 @@
-<div class="container">List of entries
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
-     <div class="col" >s.no</div>
-      <div class="col">text</div>
-      <div class="col" >image</div>
-      <div class="col" >approved</div>
-      <div class="col" >Action</div>
+<!--div class="container" *ngIf="isRecords;else NoRecordFound"-->
+<div class="col-sm-12" align="right">
+  <a class="nav-link" routerLink="#" (click)=logout()>logout </a>
+ 
+  </div>  
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5" *ngIf="isRecords;else NoRecordFound">
+     <div class="col" ><b>S.No</b></div>
+      <div class="col"><b>Feedback</b></div>
+      <div class="col" ><b>Image</b></div>
+      <div class="col" ><b>Approved</b></div>
+      <div [hidden]="!isAction" class="col" ><b>Action</b></div>
       </div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5"  *ngFor="let entries of usersEntriesList">
          <div class="col" >{{entries.id}}</div>
           <div class="col">{{entries.feedback}}</div>
-            <div class="col" ><a class="nav-link" routerLink="#" (click)=downloadfile(entries.imgurl)>{{entries.imgurl}}</a>
+            <div class="col" ><a class="nav-link" routerLink="#" (click)=downloadfile(entries.id,entries.image)>{{entries.imgurl}}</a>
           </div>
-            <div class="col"  *ngIf="entries.isApprove;else elseNotDone"> yes</div>
+            <div class="col"  *ngIf="entries.isApprove;else elseNotDone"> Approved</div>
             <ng-template #elseNotDone>
-              not
+              Not Approved
             </ng-template>
-            <div class="col" >
+            <div [hidden]="!isAction" class="col" >
                   <table>
                     <tr>
                       <td><a class="nav-link" routerLink="#" (click)=approve(entries.id)>Approve </a></td>
@@ -25,5 +30,25 @@
                   </table>
                 </div>
               </div>
-      <input type="button" value="add new entries" (click)="go()">
+              <!--div>
+                {{message}}
+                </div-->
+
+                <ng-template #NoRecordFound>
+                  <div class="d-flex justify-content-center align-items-center" style="height:100px;">
+                 <div class="bg-primary">no record found</div>    
+             </div>
+             </ng-template>
+         
+
+      <input type="button" value="add new entries" (click)="addEntries()">
+      
     </div>
+    <div class="container row">
+      <div class="col-md-12">
+          <div *ngIf=retrievedImage>
+              <img [src]="retrievedImage">
+          </div>
+      </div>
+  </div>
+    
