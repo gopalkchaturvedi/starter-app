@@ -72,9 +72,11 @@ export class EditComponent implements OnInit {
   loadChange() {
     this.message="";
     this.enableButton=true;
-
+   // console.log(this.usersEntriesEdit.feedback +" entries type "+ this.entriesType);
    if (this.usersEntriesEdit.feedback!=null){
+
     this.entriesType ="1";
+    console.log(this.usersEntriesEdit.feedback +" entries type "+ this.entriesType);
     this.isText = true;
     this.isImage = false;
     this.enableButton=false;

@@ -50,7 +50,7 @@ export class ViewEntriesComponent implements OnInit {
           this.isRecords=true;
       }if(data.code===403)
       { 
-        alert("error");
+        //alert("error");
        // this.route.navigate(['']);
       }
       else{
@@ -84,7 +84,7 @@ export class ViewEntriesComponent implements OnInit {
   }
 
   update(userEntries){
-    alert('selected id is  '+userEntries.id);
+    //alert('selected id is  '+userEntries.id);
     this.entriesService.update(userEntries).subscribe(
       data => { // json data
         // alert('Edit');
