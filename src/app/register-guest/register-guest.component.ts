@@ -13,22 +13,23 @@ import { AlertService } from 'ngx-alerts';
 export class RegisterGuestComponent implements OnInit {
   user =  new User();
   entriesType:any;
+  message="";
  
   constructor(private route:Router, private loginService:LoginService ,
     private alertService: AlertService) {
-      
+
       }
    
 
   ngOnInit() {
-    
+   this.message="";
   }
   goToLoggin(){
     this.route.navigate(['']);
   }
 
   onSubmit(){
-    //this.user.userRole=this.entriesType;
+    if(this.user.userName.trim().length>0 && this.user.password.trim().length>0){
     this.loginService.register(this.user).subscribe(
       data => { // json data
          // console.log('Success: ', data);
@@ -41,6 +42,9 @@ export class RegisterGuestComponent implements OnInit {
       error => {
         this.loginService.message="error while registering usr pls try again";
       });
+    }else{
+      this.message="incorrect user name and password, pls try again";
+    }
   
   }
 

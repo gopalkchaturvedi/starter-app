@@ -27,6 +27,7 @@ export class AddEntriesComponent implements OnInit {
   ngOnInit() {
    this.usrData=localStorage.getItem("userData");
    //this.usr=JSON.parse(this.usrData);
+   this.message="";
   }
   selectChange(event: any) {
     this.message="";
@@ -55,7 +56,8 @@ export class AddEntriesComponent implements OnInit {
     this.entriesService.saveEntries(this.userEntries).subscribe(
     data => { // json data
         console.log('Success: ');
-        this.route.navigate(['/viewEntries']);
+        //this.route.navigate(['/viewEntries']);
+        this.message="added successfully";
     },
     error => {
         console.log('Error: ', error);
@@ -66,7 +68,7 @@ export class AddEntriesComponent implements OnInit {
   this.entriesService.saveEntriesForFiles(this.currentFileUpload,this.usr.id).subscribe(
     data => { // json data
         console.log('Success: ');
-        this.route.navigate(['/viewEntries']);
+        this.message="added successfully";
     },
     error => {
         console.log('Error: ', error);
@@ -75,7 +77,7 @@ export class AddEntriesComponent implements OnInit {
  }
  
 
- this.route.navigate(['/viewEntries']);
+ //this.route.navigate(['/viewEntries']);
 }
 
 back(){
