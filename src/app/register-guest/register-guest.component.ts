@@ -29,12 +29,12 @@ export class RegisterGuestComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.user.userName.trim().length>0 && this.user.password.trim().length>0){
-    this.loginService.register(this.user).subscribe(
+    if(this.user.userName.trim().length> 0 && this.user.password.trim().length>0 && !(this.user.userRole===undefined)){
+      this.loginService.register(this.user).subscribe(
       data => { // json data
          // console.log('Success: ', data);
           if(data.code===200)
-          this.loginService.message="User registered successfully, pls login ";
+          this.loginService.message=data.message;
           else
           this.loginService.message="error while registering usr pls try again";
           this.route.navigate(['']);
@@ -43,7 +43,7 @@ export class RegisterGuestComponent implements OnInit {
         this.loginService.message="error while registering usr pls try again";
       });
     }else{
-      this.message="incorrect user name and password, pls try again";
+      this.message="either user name or password or role is empty, pls try again";
     }
   
   }

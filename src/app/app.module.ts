@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './edit/edit.component';
 import { AuthGuard } from './auth.guard';
 import { AlertModule } from 'ngx-alerts';
+import { LocationStrategy,HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AlertModule } from 'ngx-alerts';
     HomeComponent,
     AddEntriesComponent,
     EditComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import { AlertModule } from 'ngx-alerts';
     AlertModule.forRoot({maxMessages: 5, timeout: 5000}),
     AppRoutingModule
   ],
-  providers: [AuthGuard],
+  providers: [{provide:LocationStrategy, useClass:HashLocationStrategy},AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

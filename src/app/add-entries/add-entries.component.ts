@@ -57,7 +57,7 @@ export class AddEntriesComponent implements OnInit {
     data => { // json data
         console.log('Success: ');
         //this.route.navigate(['/viewEntries']);
-        this.message="added successfully";
+        this.message="user entries added successfully";
     },
     error => {
         console.log('Error: ', error);
@@ -68,10 +68,11 @@ export class AddEntriesComponent implements OnInit {
   this.entriesService.saveEntriesForFiles(this.currentFileUpload,this.usr.id).subscribe(
     data => { // json data
         console.log('Success: ');
-        this.message="added successfully";
+        this.message=data.message;
     },
     error => {
-        console.log('Error: ', error);
+       // console.log('Error: ', error);
+        this.message="File Exeeded, it sotre limit,please upload file less then 1 MB ";
        // this.alertService.warning("Invalid Username or Password") ;
     });
  }

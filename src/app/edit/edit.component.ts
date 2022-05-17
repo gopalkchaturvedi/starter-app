@@ -93,7 +93,7 @@ export class EditComponent implements OnInit {
   
   save(){
     let usrData=localStorage.getItem("userData");
-    console.log("user data in view "+usrData);
+    console.log("user data in view "+usrData+"   "+this.entriesService.editVar);
     this.usr=JSON.parse(usrData);
     this.usersEntriesEdit.userId=this.usr.id;
     this.usersEntriesEdit.id=Number(this.entriesService.editVar);
@@ -118,6 +118,7 @@ export class EditComponent implements OnInit {
     },
     error => {
         console.log('Error: ', error);
+        this.message="File Exeeded, it sotre limit,please upload file less then 1 MB ";
        // this.alertService.warning("Invalid Username or Password") ;
     });
  }
@@ -133,13 +134,12 @@ selectFile(event) {
   this.message="";
   const file = event.target.files.item(0);  
   let filename = file.name ; 
-  //alert("file type "+file.type );
-  if (file.type.match('image/*')||file.type.match('image/jpeg')) {  
+    if (file.type.match('image/*')||file.type.match('image/jpeg')) {  
     var size = event.target.files[0].size;  
       this.currentFileUpload=event.target.files[0]; 
       this.selectedFiles = event.target.files;  
       this.enableButton=false;
-     
+    
   }else{
     //alert('invalid file type, please upload image file');
     this.enableButton=true;
